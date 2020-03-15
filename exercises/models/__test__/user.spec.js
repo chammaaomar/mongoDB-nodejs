@@ -1,6 +1,7 @@
 const User = require('../user')
-
-describe('User model', () => {
+const connect = require('../../connect')
+describe('User model', async () => {
+  
   test('first name must be required', async () => {
     expect.assertions(1)
 
@@ -69,7 +70,6 @@ describe('User model', () => {
 
     expect(user.betaUser).toBe(false)
   })
-
   test('should have correct fields', async () => {
     const now = Date.now()
     const {_id, __v, ...user} = (await User.create({

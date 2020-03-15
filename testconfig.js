@@ -17,7 +17,7 @@ beforeEach(async done => {
   }
   if (mongoose.connection.readyState === 0) {
     try {
-      await connect(url + db)
+      await connect(url)
       clearDB()
     } catch (e) {
       throw e
@@ -27,9 +27,9 @@ beforeEach(async done => {
   }
 })
 afterEach(done => {
-  mongoose.disconnect()
   return done()
 })
 afterAll(done => {
+  mongoose.disconnect();
   return done()
 })

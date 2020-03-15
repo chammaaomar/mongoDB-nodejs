@@ -1,6 +1,3 @@
 const mongoose = require('mongoose')
-mongoose.Promise = global.Promise
-
-const connect = (url) => Promise.reject()
-
+const connect = (url) => mongoose.connect(url, {useUnifiedTopology: true, useNewUrlParser: true, keepAlive: true, keepAliveInitialDelay: 1, poolSize: 10})
 module.exports = connect
