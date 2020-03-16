@@ -12,7 +12,7 @@ const orgSchema = new mongoose.Schema({
     status: {
       type: String,
       required: true,
-      default: ['active'],
+      default: 'active',
       enum: ['active', 'trialing', 'overdue', 'canceled']
     },
     last4: {
@@ -21,6 +21,15 @@ const orgSchema = new mongoose.Schema({
       max: 4
     }
   }
+})
+// asynchronous middleware / hook
+// it is somewhat like decoration in Python
+orgSchema.post('remove', async function() {
+   await Project.deleteMany({org: this._id});
+})
+
+orgSchema.virtual('avatar', function() {
+    return `${cdnUrl}/${this.name}`;
 })
 
 module.exports = mongoose.model('org', orgSchema)

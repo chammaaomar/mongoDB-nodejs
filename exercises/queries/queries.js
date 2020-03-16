@@ -17,7 +17,7 @@ const postsForAuthor = async (authorId) => {
 }
 
 const fullPostById = async (id) => {
-    const post = await Post.findOne({_id: id}).populate('author').exec();
+    const post = await Post.findOne({_id: id}).populate('author').populate('post').exec();
     if (!post) {
         throw new Error(`Post with id ${id} not found`);
     }
